@@ -10,7 +10,8 @@ function servefrom(url){
     function (errors, window) {
         var data = [];
         window.$('.datosplantel').each(function () {
-            data.push(window.$(this).text());
+            var dp = window.$(this).text().replace(/,/g, '%');
+            data.push(dp);
         });
         console.log(data.join(','));
     });   
