@@ -1,0 +1,20 @@
+#!/bin/bash
+
+ROOT='http://www.bachillerato.yucatan.gob.mx/index.php?Itemid=504'
+
+for i in 20 40 60 80; do
+    target=$ROOT"&start=$i" 
+    echo "sucking the juice out of $target"
+    node juice-maker $target >> refs
+    echo "DONE!"
+done
+
+echo "Serving really cool juice... hold on..."
+echo NOMBRE,MUNICIPIO,DOMICILIO,TELEFONO,ESPECIALIDADES,SUBSISTEMAS,TURNO,EMAIL > escuelas.csv
+
+while read line
+do
+    echo serving from $line
+    node glass.js $line >> escuelas.csv
+    echo done
+done < refs
